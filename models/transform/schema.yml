@@ -1,0 +1,6 @@
+SF_OPPORTUNITY_HISTORY_JOINED:
+    constraints:
+        unique:
+            - opportunity_history_id
+        not_null:
+            - opportunity_history_id

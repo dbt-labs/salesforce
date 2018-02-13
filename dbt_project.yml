@@ -40,3 +40,4 @@ models:
         sf_opportunity:             #"schema.table"
         sf_opportunity_history:     #"schema.table"
         sf_user:                    #"schema.table"
+        first_record:               # earliest date in opportunity_history

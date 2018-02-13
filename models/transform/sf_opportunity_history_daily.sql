@@ -10,26 +10,20 @@
 with opp_history as (
 
   select distinct
-    date_trunc('day', created_date)::date as start_date,
+    date_trunc('day', created_at)::date as start_date,
     date_trunc('day', active_to)::date as end_date,
     opportunity_id,
-    sf_account_id,
-    uv_account_id,
-    csm_name,
-    record_type,
-    record_type_id
+    account_id,
+    owner_name,
   from {{ref('sf_opportunity_history_joined')}}
 
 ),
 
 days as (
 
-/*  select * from {{ref('all_days')}}
-  where date_day <= date_trunc('day', current_date) */
-
-  dbt_utils.date_spine(datepart="day",
-    start_date="to_date('01/01/2016', 'mm/dd/yyyy')",
-    end_date="dateadd(week, 1, current_date)")
+      {{ dbt_utils.date_spine(datepart="day",
+        start_date="to_date{{ var('first_record') }}, 'mm/dd/yyyy')",
+        end_date="dateadd(week, 1, current_date)") }}
 
 ),
 

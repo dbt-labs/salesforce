@@ -27,16 +27,22 @@ opps as (
 joined as (
 
     select
-        history.*,
-        users.full_name as csm_name,
-        opps.account_id,
-        opps.record_type,
-        opps.record_type_id
+
+        history.opportunity_history_id,
+        history.opportunity_id,
+        history.created_by_id,
+        history.probability,
+        history.stage_name,
+        history.forecast_category,
+        history.amount,
+        history.expected_revenue,
+        history.created_at,
+        users.full_name as owner_name,
+        opps.account_id
+
     from history
-    left join users
-        on history.created_by_id = users.user_id
-    left join opps
-        on opps.id = history.opportunity_id
+    left join users on history.created_by_id = users.user_id
+    left join opps using (opportunity_id)
 
 ),
 
