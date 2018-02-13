@@ -1,0 +1,27 @@
+sf_account:
+    constraints:
+        unique:
+            - account_id
+        not_null:
+            - account_id
+
+sf_contact:
+    constraints:
+        unique:
+            - contact_id
+        not_null:
+            - contact_id
+
+sf_lead:
+    constraints:
+        unique:
+            - lead_id
+        not_null:
+            - lead_id
+
+sf_opportunity:
+    constraints:
+        unique:
+            - opportunity_id
+        not_null:
+            - opportunity_id

@@ -13,7 +13,7 @@ profile: 'default'
 # The `source-paths` config, for example, states that source models can be found
 # in the "models/" directory. You probably won't need to change these!
 source-paths: ["models"]
-analysis-paths: ["analysis"] 
+analysis-paths: ["analysis"]
 test-paths: ["tests"]
 data-paths: ["data"]
 macro-paths: ["macros"]
@@ -30,6 +30,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/ directory
 # as views (the default). Try changing `view` to `table` below, then re-running dbt
 models:
-  my_new_package:
-      example:
-          materialized: view
+  salesforce:
+      enabled: true
+      materialized: view
+      vars:
+        sf_account:                 #"schema.table"
+        sf_contact:                 #"schema.table"
+        sf_lead:                    #"schema.table"
+        sf_opportunity:             #"schema.table"
+        sf_opportunity_history:     #"schema.table"
+        sf_user:                    #"schema.table"
