@@ -23,7 +23,7 @@ renamed as (
         expectedrevenue as expected_revenue,
 
         -- metadata
-        createddate as created_at
+        createddate as created_date
 
 
     from source

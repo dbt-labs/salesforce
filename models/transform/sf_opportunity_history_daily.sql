@@ -15,8 +15,7 @@ with opp_history as (
     opportunity_id,
     account_id,
     owner_name,
-    stage_name,
-    arr
+    stage_name
   from {{ref('sf_opportunity_history_joined')}}
 
 ),

@@ -14,6 +14,8 @@ clean-targets:
     - "target"
     - "dbt_modules"
 
+on-run-start: "alter session set quoted_identifiers_ignore_case = false" # snowflake
+
 repositories:
     - https://github.com/fishtown-analytics/dbt-utils.git@0.1.6
 

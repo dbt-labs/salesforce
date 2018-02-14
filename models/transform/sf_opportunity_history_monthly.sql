@@ -25,7 +25,6 @@ opp_months as (
         date_month,
         opportunity_id,
         account_id,
-        arr,
         first_value(owner_name ignore nulls) over (partition by opportunity_id,
             date_month order by date_day rows between unbounded preceding and
             unbounded following) as owner_name,

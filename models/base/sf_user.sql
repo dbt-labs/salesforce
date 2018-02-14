@@ -10,19 +10,23 @@ renamed as (
 
         id as user_id,
 
-        profile_firstname as first_name,
-        profile_lastname as last_name,
-        emails,
+        -- keys
+        accountid as account_id,
 
-        company_companyid as company_id,
-        company_role,
-        company_position,
+        -- personage
+        firstname as first_name,
+        middlename as middle_name,
+        lastname as last_name,
+        name as full_name,
+        username as user_name,
+        title,
+        email,
+        phone as work_phone,
+        mobilephone as mobile_phone,
 
-        username,
-        roles as user_roles,
-
-        createdat as created_at,
-        updatedat as updated_at
+        -- metadata
+        createddate as created_at,
+        lastmodifieddate as updated_at
 
     from source
 

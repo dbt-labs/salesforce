@@ -34,7 +34,7 @@ joined as (
         history.stage_name,
         history.created_date,
         users.full_name as owner_name,
-        opps.account_id,
+        opps.account_id
 
     from history
     left join users on history.created_by_id = users.user_id

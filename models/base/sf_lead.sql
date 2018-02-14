@@ -39,7 +39,7 @@ renamed as (
 
         -- company context
         company as company_name,
-        city end as company_city,
+        city as company_city,
         website,
         numberofemployees as number_of_employees,
 
