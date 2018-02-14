@@ -1,6 +1,20 @@
-SF_OPPORTUNITY_HISTORY_JOINED:
+sf_opportunity_history_daily:
     constraints:
         unique:
-            - opportunity_history_id
+            - opp_daily_id
         not_null:
-            - opportunity_history_id
+            - opp_daily_id
+
+sf_opportunity_history_joined:
+    constraints:
+        unique:
+            - opp_hist_id
+        not_null:
+            - opp_hist_id
+
+sf_opportunity_history_monthly:
+    constraints:
+        unique:
+            - opp_monthly_id
+        not_null:
+            - opp_monthly_id

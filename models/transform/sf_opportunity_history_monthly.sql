@@ -21,22 +21,23 @@ opp_months as (
 --at the beginning of the month
 
     select distinct
+
         date_month,
         opportunity_id,
-        sf_account_id,
-        uv_account_id,
-        first_value(csm_name ignore nulls) over (partition by opportunity_id,
+        account_id,
+        arr,
+        first_value(owner_name ignore nulls) over (partition by opportunity_id,
             date_month order by date_day rows between unbounded preceding and
-            unbounded following) as csm_name,
-        first_value(record_type ignore nulls) over (partition by opportunity_id,
+            unbounded following) as owner_name,
+        first_value(stage_name ignore nulls) over (partition by opportunity_id,
             date_month order by date_day rows between unbounded preceding and
-            unbounded following) as record_type,
-        first_value(record_type_id ignore nulls) over (partition by opportunity_id,
-            date_month order by date_day rows between unbounded preceding and
-            unbounded following) as record_type_id
-    from opp_history
+            unbounded following) as stage_name
 
+    from opp_history
 
 )
 
-select * from opp_months
+select
+    {{ dbt_utils.surrogate_key('date_month','opportunity_id') }} as opp_monthly_id,
+    *
+from opp_months

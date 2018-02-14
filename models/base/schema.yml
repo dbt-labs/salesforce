@@ -1,39 +1,54 @@
-SF_ACCOUNT:
+sf_account:
     constraints:
         unique:
             - account_id
         not_null:
             - account_id
+        relationships:
+            - {from: owner_id, to: ref('sf_user'), field: user_id}
 
-SF_CONTACT:
+sf_contact:
     constraints:
         unique:
             - contact_id
         not_null:
             - contact_id
+        relationships:
+            - {from: owner_id, to: ref('sf_user'), field: user_id}
+            - {from: account_id, to: ref('sf_account'), field: account_id}
 
-SF_LEAD:
+sf_lead:
     constraints:
         unique:
             - lead_id
         not_null:
             - lead_id
+        relationships:
+            - {from: owner_id, to: ref('sf_user'), field: user_id}
+            - {from: account_id, to: ref('sf_account'), field: account_id}
+            - {from: opportunity_id, to: ref('sf_opportunity'), field: opportunity_id}
 
-SF_OPPORTUNITY_HISTORY:
+sf_opportunity_history:
     constraints:
         unique:
             - opportunity_history_id
         not_null:
             - opportunity_history_id
+        relationships:
+            - {from: created_by_id, to: ref('sf_user'), field: user_id}
+            - {from: opportunity_id, to: ref('sf_opportunity'), field: opportunity_id}
 
-SF_OPPORTUNITY:
+sf_opportunity:
     constraints:
         unique:
             - opportunity_id
         not_null:
             - opportunity_id
+        relationships:
+            - {from: owner_id, to: ref('sf_user'), field: user_id}
+            - {from: account_id, to: ref('sf_account'), field: account_id}
 
-SF_USER:
+sf_user:
     constraints:
         unique:
             - user_id
