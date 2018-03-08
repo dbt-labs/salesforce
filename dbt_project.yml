@@ -15,7 +15,7 @@ clean-targets:
     - "dbt_modules"
 
 repositories:
-    - https://github.com/fishtown-analytics/dbt-utils.git@0.1.6
+    - https://github.com/fishtown-analytics/dbt-utils.git@0.1.7
 
 models:
   salesforce:
