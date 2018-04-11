@@ -1,7 +1,6 @@
 with source as (
 
     select * from {{ var('sf_account') }}
-    where isdeleted = false
 
 ),
 
