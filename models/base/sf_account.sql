@@ -1,6 +1,6 @@
 with source as (
 
-    select * from {{ var('sf_account') }}
+    select * from {{var('schema')}}.account
 
 ),
 

@@ -1,6 +1,6 @@
 with source as (
 
-    select * from {{ var('sf_lead') }}
+    select * from {{var('schema')}}.lead
 
 ),
 

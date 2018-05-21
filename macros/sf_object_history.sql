@@ -15,7 +15,7 @@
 
     with source as (
 
-    	{{ coalesce_stitch_fields('raw.salesforce_s.' ~ object) }}
+    	select * from {{var('schema')}}.{{object}}
 
     ),
 

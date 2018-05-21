@@ -1,6 +1,6 @@
 with source as (
 
-    select * from {{ var('sf_contact') }}
+    select * from {{var('schema')}}.contact
 
 ),
 
