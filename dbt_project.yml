@@ -17,7 +17,7 @@ clean-targets:
 models:
   salesforce:
       enabled: true
-      materialized: view
+      materialized: ephemeral
       vars:
         schema: 'salesforce_s'
         first_record:               # earliest date in opportunity history
