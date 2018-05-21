@@ -1,7 +1,6 @@
 with source as (
 
-    select * from {{ var('sf_opportunity_history') }}
-    where isdeleted = false
+    select * from {{var('schema')}}.opportunityhistory
 
 ),
 

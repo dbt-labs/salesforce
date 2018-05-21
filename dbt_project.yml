@@ -14,18 +14,10 @@ clean-targets:
     - "target"
     - "dbt_modules"
 
-repositories:
-    - https://github.com/fishtown-analytics/dbt-utils.git@0.1.6
-
 models:
   salesforce:
       enabled: true
       materialized: view
       vars:
-        sf_account:                 #"schema.table"
-        sf_contact:                 #"schema.table"
-        sf_lead:                    #"schema.table"
-        sf_opportunity:             #"schema.table"
-        sf_opportunity_history:     #"schema.table"
-        sf_user:                    #"schema.table"
+        schema: 'salesforce_s'
         first_record:               # earliest date in opportunity history
