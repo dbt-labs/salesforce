@@ -22,7 +22,9 @@ with opp_history as (
         
         {{ "," if (custom_fields|length) > 0 }}
         {% for custom_field in custom_fields %}
-            {{custom_field}}{{"," if not loop.last}}
+            last_value({{custom_field}}) ignore nulls over (partition by opportunity_id,
+                created_date order by created_date rows between unbounded preceding and
+                unbounded following) as {{custom_field}}{{"," if not loop.last}}
         {% endfor %}
 
     from {{ref('sf_opportunity_history_joined')}}
