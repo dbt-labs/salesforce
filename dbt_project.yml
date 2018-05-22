@@ -21,3 +21,5 @@ models:
       vars:
         schema: 'salesforce_s'
         first_record:               # earliest date in opportunity history
+        opportunity_history_custom_fields:
+        #    - 'example_field'

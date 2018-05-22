@@ -5,7 +5,7 @@
     config(
         materialized='table',
         sort='date_month',
-        dist='uv_account_id'
+        dist='account_id'
     )
 }}
 
@@ -25,18 +25,26 @@ opp_months as (
         date_month,
         opportunity_id,
         account_id,
+        
         first_value(owner_name ignore nulls) over (partition by opportunity_id,
             date_month order by date_day rows between unbounded preceding and
             unbounded following) as owner_name,
         first_value(stage_name ignore nulls) over (partition by opportunity_id,
             date_month order by date_day rows between unbounded preceding and
-            unbounded following) as stage_name
+            unbounded following) as stage_name,
+            
+        {{ "," if (custom_fields|length) > 0 }}
+        {% for custom_field in custom_fields %}
+            last_value({{custom_field}}) over (partition by opportunity_id,
+                date_month order by date_day rows between unbounded preceding and
+                unbounded following) as {{custom_field}}{{"," if not loop.last}}
+        {% endfor %}
 
     from opp_history
 
 )
 
 select
-    {{ dbt_utils.surrogate_key('date_month','opportunity_id') }} as opp_monthly_id,
+    {{ dbt_utils.surrogate_key('date_month','opportunity_id') }} as id,
     *
 from opp_months

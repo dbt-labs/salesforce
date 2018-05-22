@@ -7,16 +7,25 @@
     )
 }}
 
+{%- set custom_fields = var('opportunity_history_custom_fields') -%}
+
 with opp_history as (
 
-  select distinct
-    date_trunc('day', created_date)::date as start_date,
-    date_trunc('day', active_to)::date as end_date,
-    opportunity_id,
-    account_id,
-    owner_name,
-    stage_name
-  from {{ref('sf_opportunity_history_joined')}}
+    select distinct
+  
+        date_trunc('day', created_date)::date as start_date,
+        date_trunc('day', active_to)::date as end_date,
+        opportunity_id,
+        account_id,
+        owner_name,
+        stage_name
+        
+        {{ "," if (custom_fields|length) > 0 }}
+        {% for custom_field in custom_fields %}
+            {{custom_field}}{{"," if not loop.last}}
+        {% endfor %}
+
+    from {{ref('sf_opportunity_history_joined')}}
 
 ),
 
@@ -31,9 +40,11 @@ days as (
 opp_days as (
 --this creates the final output of one row per day the stage was active
     select
+    
         days.date_day,
         date_trunc('month', days.date_day)::date as date_month,
         opp_history.*
+    
     from days
     inner join opp_history
       on days.date_day >= opp_history.start_date
@@ -42,6 +53,6 @@ opp_days as (
 )
 
 select
-    {{ dbt_utils.surrogate_key('date_day','opportunity_id') }} as opp_daily_id,
+    {{ dbt_utils.surrogate_key('date_day','opportunity_id') }} as id,
     *
 from opp_days

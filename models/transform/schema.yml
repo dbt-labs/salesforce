@@ -1,20 +1,29 @@
-sf_opportunity_history_daily:
+sf_opportunity_history_unioned:
     constraints:
         unique:
-            - opp_daily_id
+            - opportunity_history_id
         not_null:
-            - opp_daily_id
+            - opportunity_history_id
+            - created_date
+            - created_by_id
 
 sf_opportunity_history_joined:
     constraints:
         unique:
-            - opp_hist_id
+            - opportunity_history_id
         not_null:
-            - opp_hist_id
+            - opportunity_history_id
+
+sf_opportunity_history_daily:
+    constraints:
+        unique:
+            - id
+        not_null:
+            - id
 
 sf_opportunity_history_monthly:
     constraints:
         unique:
-            - opp_monthly_id
+            - id
         not_null:
-            - opp_monthly_id
+            - id

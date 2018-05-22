@@ -28,13 +28,18 @@ joined as (
 
     select
 
-        history.opportunity_history_id as opp_hist_id,
+        history.opportunity_history_id,
         history.opportunity_id,
         history.created_by_id,
         history.stage_name,
         history.created_date,
         users.full_name as owner_name,
         opps.account_id
+        
+        {{ "," if (custom_fields|length) > 0 }}
+        {% for custom_field in custom_fields %}
+            history.{{custom_field}}{{"," if not loop.last}}
+        {% endfor %}
 
     from history
     left join users on history.created_by_id = users.user_id
